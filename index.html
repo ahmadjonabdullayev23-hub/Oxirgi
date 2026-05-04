@@ -1,108 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Rahmat Chef Delivery</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-body{margin:0;font-family:Arial;background:#fafafa}
-
-header{
-background:#e53935;
-color:white;
-text-align:center;
-padding:25px;
-}
-
-header a{
-display:inline-block;
-margin-top:10px;
-background:white;
-color:#e53935;
-padding:10px 15px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.container{padding:15px}
-
-.card{
-background:white;
-margin:10px 0;
-padding:15px;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-
-button{
-background:green;
-color:white;
-border:none;
-padding:10px;
-border-radius:8px;
-margin-top:10px;
-width:100%;
-cursor:pointer;
-}
-
-footer{
-text-align:center;
-padding:20px;
-background:#222;
-color:white;
-margin-top:20px;
-font-size:14px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Rahmat Chef</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { position: sticky; top: 0; background-color: #fff; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-around; background: #f8f8f8; padding: 10px; }
+        nav a { text-decoration: none; padding: 10px 20px; color: #333; }
+        .categories { text-align: center; margin: 20px 0; }
+        .bottom-bar { position: fixed; bottom: 0; width: 100%; background: #007BFF; color: white; text-align: center; padding: 20px; }
+        .bottom-bar button { background: white; color: #007BFF; border: none; padding: 10px 20px; cursor: pointer; }
+    </style>
 </head>
-
 <body>
-
-<header>
-<h1>🍽 Rahmat Chef Delivery</h1>
-<p>24/7 mazali taomlar</p>
-
-<a href="https://t.me/rahmatchef_delivery_bot">
-Buyurtma berish
-</a>
-</header>
-
-<div class="container">
-
-<div class="card">
-<h3>🍵 Ko‘k choy</h3>
-<p>15 000 so‘m</p>
-<button onclick="order('Ko‘k choy')">Buyurtma</button>
-</div>
-
-<div class="card">
-<h3>☕ Cappuccino</h3>
-<p>30 000 so‘m</p>
-<button onclick="order('Cappuccino')">Buyurtma</button>
-</div>
-
-<div class="card">
-<h3>🍰 Cheesecake</h3>
-<p>35 000 so‘m</p>
-<button onclick="order('Cheesecake')">Buyurtma</button>
-</div>
-
-</div>
-
-<footer>
-📞 +998 93 272 22 22 <br>
-📸 Instagram: @rahmatchef.uz <br>
-🤖 Telegram bot: @rahmatchef_delivery_bot
-</footer>
-
-<script>
-function order(item){
-window.location.href =
-"https://t.me/rahmatchef_delivery_bot?start=" + encodeURIComponent(item);
-}
-</script>
-
+    <header>
+        <h1>Rahmat Chef</h1>
+    </header>
+    <nav>
+        <a href="#bar">Bar</a>
+        <a href="#coffee">Coffee</a>
+        <a href="#dessert">Dessert</a>
+    </nav>
+    <div class="categories">
+        <h2>Categories</h2>
+        <p>Explore our delicious offerings!</p>
+    </div>
+    <div class="bottom-bar">
+        <button>Order Now</button>
+    </div>
 </body>
 </html>
