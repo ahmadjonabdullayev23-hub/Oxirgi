@@ -1,47 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahmat Chef Delivery App</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahmat Chef Delivery</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;ackground:#fafafa;
+}
+
+header{
+position:sticky;
+top:0;
+background:white;
+padding:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+}
+
+.logo{
+font-weight:bold;
+font-size:18px;
+color:#e53935;
+}
+
+.menu-tabs{
+display:flex;
+overflow-x:auto;
+padding:10px;
+background:white;
+}
+
+.menu-tabs button{
+border:none;
+background:#eee;
+margin-right:10px;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+}
+
+.menu-tabs button.active{
+background:#e53935;
+color:white;
+}
+
+.container{
+padding:10px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:15px;
+margin-bottom:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card h3{
+margin:0;
+}
+
+.price{
+color:#e53935;
+font-weight:bold;
+}
+
+button.order{
+margin-top:10px;
+width:100%;
+padding:10px;
+border:none;
+background:#e53935;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+.bottom-bar{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+padding:10px;
+box-shadow:0 -2px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.bottom-bar a{
+background:#e53935;
+color:white;
+padding:12px 20px;
+border-radius:10px;
+text-decoration:none;
+display:inline-block;
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#orders">Orders</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="home">
-            <h1>Welcome to Rahmat Chef</h1>
-            <p>Delicious meals delivered to your door!</p>
-        </section>
-        <section id="menu">
-            <h2>Our Menu</h2>
-            <div class="card">
-                <h3>Dish Name</h3>
-                <p>Description of the dish.</p>
-                <button>Order Now</button>
-            </div>
-            <!-- Repeat card structure for more dishes -->
-        </section>
-        <section id="orders">
-            <h2>Your Orders</h2>
-            <p>Manage your orders here.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>You can reach us via our <a href="https://telegram.me/YourBotLink">Telegram Bot</a></p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Rahmat Chef. All rights reserved.</p>
-    </footer>
+
+<header>
+<div class="logo">Rahmat Chef</div>
+<div>24/7</div>
+</header>
+
+<div class="menu-tabs">
+<button onclick="show('bar')" class="active">Bar</button>
+<button onclick="show('coffee')">Coffee</button>
+<button onclick="show('dessert')">Dessert</button>
+</div>
+
+<div class="container">
+
+<div id="bar" class="menu">
+<div class="card">
+<h3>Ko'k choy</h3>
+<div class="price">15 000</div>
+<button class="order" onclick="order('Ko'k choy')">Buyurtma</button>
+</div>
+
+<div class="card">
+<h3>Qora choy</h3>
+<div class="price">15 000</div>
+<button class="order" onclick="order('Qora choy')">Buyurtma</button>
+</div>
+</div>
+
+<div id="coffee" class="menu" style="display:none">
+<div class="card">
+<h3>Cappuccino</h3>
+<div class="price">30 000</div>
+<button class="order" onclick="order('Cappuccino')">Buyurtma</button>
+</div>
+</div>
+
+<div id="dessert" class="menu" style="display:none">
+<div class="card">
+<h3>Cheesecake</h3>
+<div class="price">35 000</div>
+<button class="order" onclick="order('Cheesecake')">Buyurtma</button>
+</div>
+</div>
+
+</div>
+
+<div class="bottom-bar">
+<a href="https://t.me/rahmatchef_delivery_bot">Buyurtma berish</a>
+</div>
+
+<script>
+function show(id){
+document.querySelectorAll('.menu').forEach(el=>el.style.display='none');
+document.getElementById(id).style.display='block';
+
+document.querySelectorAll('.menu-tabs button').forEach(btn=>btn.classList.remove('active'));
+event.target.classList.add('active');
+}
+
+function order(item){
+window.location.href="https://t.me/rahmatchef_delivery_bot?start="+encodeURIComponent(item);
+}
+</script>
+
 </body>
 </html>
