@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahmat Chef | Yetkazib berish</title>
+    <title>Rahmat Chef | Delivery Menu</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #254e4e; /* Logotipdagi to'q yashil */
-            --accent: #a8d5ba;  /* Logotipdagi och yashil */
+            --primary: #254e4e; 
+            --accent: #a8d5ba;  
             --bg: #F9FAFB;
             --white: #ffffff;
             --text: #1F2937;
@@ -25,7 +25,6 @@
             line-height: 1.6;
         }
 
-        /* HEADER */
         header {
             background: var(--white);
             padding: 15px 5%;
@@ -58,151 +57,50 @@
             gap: 8px;
         }
 
-        #cart-count {
-            background: var(--accent);
-            color: var(--primary);
-            border-radius: 50%;
-            padding: 2px 7px;
-            font-size: 12px;
-        }
-
-        /* CATEGORIES (DELEVER STYLE) */
         .categories-nav {
             background: var(--white);
             padding: 10px 5%;
             display: flex;
-            gap: 15px;
+            gap: 12px;
             overflow-x: auto;
-            white-space: nowrap;
+            position: sticky;
+            top: 64px;
+            z-index: 999;
             border-bottom: 1px solid #eee;
-            scrollbar-width: none;
         }
-        .categories-nav::-webkit-scrollbar { display: none; }
 
         .cat-item {
-            padding: 8px 20px;
+            padding: 8px 18px;
             background: #f3f4f6;
-            border-radius: 25px;
-            font-size: 14px;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .cat-item.active {
-            background: var(--primary);
-            color: var(--accent);
+            white-space: nowrap;
         }
 
-        /* MENU GRID */
+        .cat-item.active { background: var(--primary); color: var(--accent); }
+
         .container { padding: 20px 5%; }
-        
-        .section-title {
-            margin: 20px 0;
-            font-size: 24px;
-            font-weight: 700;
-        }
+        .section-title { margin: 30px 0 15px; font-size: 22px; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; }
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 20px;
-        }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
 
-        .product-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-card:hover { transform: translateY(-5px); }
+        .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+        .product-img { width: 100%; height: 140px; background: #f0f0f0; object-fit: cover; }
+        .product-info { padding: 10px; flex: 1; display: flex; flex-direction: column; }
+        .product-name { font-size: 14px; font-weight: 600; min-height: 40px; }
+        .product-price { color: var(--primary); font-weight: 700; font-size: 15px; margin-top: 10px; }
 
-        .product-img {
-            width: 100%;
-            height: 150px;
-            background: #eee;
-            object-fit: cover;
-        }
-
-        .product-info { padding: 12px; flex: 1; display: flex; flex-direction: column; }
-        
-        .product-name { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
-        
-        .product-price { color: var(--primary); font-weight: 700; margin-top: auto; }
-
-        .add-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .add-btn:active { transform: scale(0.9); }
-
-        .card-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
+        .add-btn { background: var(--primary); color: white; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 18px; }
 
         /* CART MODAL */
-        .cart-modal {
-            position: fixed;
-            right: -100%;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background: var(--white);
-            z-index: 2000;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            transition: 0.4s;
-            display: flex;
-            flex-direction: column;
-        }
+        .cart-modal { position: fixed; right: -100%; top: 0; width: 350px; height: 100%; background: var(--white); z-index: 2000; box-shadow: -5px 0 20px rgba(0,0,0,0.1); transition: 0.4s; display: flex; flex-direction: column; }
         .cart-modal.open { right: 0; }
-
-        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
-        
         .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
-
-        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
-
-        .order-btn {
-            width: 100%;
-            background: var(--primary);
-            color: var(--accent);
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* MOBILE OVERLAY */
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            z-index: 1500;
-        }
+        .order-btn { width: 100%; background: var(--primary); color: var(--accent); border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 1500; }
         .overlay.show { display: block; }
-
-        @media (max-width: 480px) {
-            .cart-modal { width: 100%; }
-            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-        }
     </style>
 </head>
 <body>
@@ -214,84 +112,115 @@
         </div>
     </header>
 
-    <div class="categories-nav">
-        <div class="cat-item active">Barchasi</div>
-        <div class="cat-item">San Sebastian</div>
-        <div class="cat-item">Coffee</div>
-        <div class="cat-item">Kurasan</div>
-        <div class="cat-item">Ichimliklar</div>
-    </div>
+    <div class="categories-nav" id="cat-nav"></div>
 
-    <div class="container">
-        <h2 class="section-title">Bizning menyu</h2>
-        <div class="product-grid" id="product-list">
-            </div>
-    </div>
+    <div class="container" id="menu-container"></div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
     <div class="cart-modal" id="cart-modal">
-        <div class="cart-header">
+        <div style="padding:20px; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">
             <h3>Savatcha</h3>
             <button onclick="toggleCart()" style="border:none; background:none; font-size:20px;">✕</button>
         </div>
-        <div class="cart-items" id="cart-items-list">
-            </div>
-        <div class="cart-footer">
+        <div class="cart-items" id="cart-items-list"></div>
+        <div style="padding:20px; border-top:1px solid #eee;">
             <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:700;">
                 <span>Jami:</span>
                 <span id="total-price">0 so'm</span>
             </div>
-            <button class="order-btn" onclick="sendOrder()">Buyurtma berish (Telegram)</button>
+            <button class="order-btn" onclick="sendOrder()">Telegram orqali buyurtma</button>
         </div>
     </div>
 
     <script>
-        const products = [
-            { id: 1, name: "San Sebastian Nutella", price: 25000, img: "https://via.placeholder.com/200x150?text=San+Sebastian" },
-            { id: 2, name: "Kurasan Fistashka", price: 20000, img: "https://via.placeholder.com/200x150?text=Kurasan" },
-            { id: 3, name: "Cappucino Katta", price: 35000, img: "https://via.placeholder.com/200x150?text=Coffee" },
-            { id: 4, name: "Moxito Grafin", price: 50000, img: "https://via.placeholder.com/200x150?text=Moxito" }
-        ];
+        const MENU_DATA = {
+            "San Sebastian": [
+                {n:"Karamelniy San Sebastian", p:20000}, {n:"Malinali San Sebastian", p:20000},
+                {n:"San Sebastian (Apelsinli)", p:20000}, {n:"San Sebastian (Classik)", p:20000},
+                {n:"San Sebastian (Matcha)", p:20000}, {n:"Fistashkali San Sebastian", p:20000},
+                {n:"Dragon Fruit San Sebastian", p:20000}, {n:"San Sebastian Kofeli", p:20000},
+                {n:"Qulupnayli San Sebastian", p:20000}, {n:"San Sebastian Mini", p:36000}
+            ],
+            "Tortlar va Chizkeyklar": [
+                {n:"Medovik", p:35000}, {n:"Spartak", p:35000}, {n:"Oreo Chizkeyk", p:35000},
+                {n:"Malinali Chizkeyk", p:35000}, {n:"Shokoladli Chizkeyk", p:35000},
+                {n:"Tiramisu Chizkeyk", p:35000}, {n:"Lotus Chizkeyk", p:35000},
+                {n:"Napoleon Torti", p:35000}, {n:"Matilda (Shokoladli)", p:35000},
+                {n:"Snickers Torti", p:35000}
+            ],
+            "Kruassan va Piroglar": [
+                {n:"Kruasan (Fistashkali)", p:20000}, {n:"Kruasan (Shokoladli)", p:20000},
+                {n:"Kruasan (Mindalli)", p:20000}, {n:"Olmali Pirog", p:17000},
+                {n:"Tvorogli Pirog", p:17000}, {n:"Olchali Pirog", p:17000}
+            ],
+            "Pechenye va Boshqalar": [
+                {n:"Merenga Rulet", p:35000}, {n:"Pahlava (1kg)", p:80000},
+                {n:"Trubochka (Krem bilan)", p:10000}, {n:"Makaron Fistashkali", p:10000},
+                {n:"Limonli Muss", p:20000}, {n:"Profitirol", p:12000}
+            ]
+        };
 
         let cart = [];
 
-        function renderProducts() {
-            const list = document.getElementById('product-list');
-            list.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <img src="${p.img}" class="product-img">
-                    <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <div class="card-bottom">
-                            <div class="product-price">${p.price.toLocaleString()} so'm</div>
-                            <button class="add-btn" onclick="addToCart(${p.id})">+</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        function init() {
+            const nav = document.getElementById('cat-nav');
+            const container = document.getElementById('menu-container');
+            
+            Object.keys(MENU_DATA).forEach((cat, idx) => {
+                // Nav
+                const btn = document.createElement('div');
+                btn.className = `cat-item ${idx===0?'active':''}`;
+                btn.textContent = cat;
+                btn.onclick = () => {
+                    document.querySelectorAll('.cat-item').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById(cat).scrollIntoView({behavior:'smooth', block:'center'});
+                };
+                nav.appendChild(btn);
+
+                // Section
+                const section = document.createElement('div');
+                section.id = cat;
+                section.innerHTML = `<h2 class="section-title">${cat}</h2><div class="product-grid"></div>`;
+                const grid = section.querySelector('.product-grid');
+                
+                MENU_DATA[cat].forEach(p => {
+                    grid.innerHTML += `
+                        <div class="product-card">
+                            <div class="product-img"></div>
+                            <div class="product-info">
+                                <div class="product-name">${p.n}</div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                                    <div class="product-price">${p.p.toLocaleString()} so'm</div>
+                                    <button class="add-btn" onclick="addToCart('${p.n}', ${p.p})">+</button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                container.appendChild(section);
+            });
         }
 
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const inCart = cart.find(item => item.id === id);
-            if (inCart) inCart.qty++;
-            else cart.push({...product, qty: 1});
-            updateUI();
+        function addToCart(name, price) {
+            const ex = cart.find(i => i.n === name);
+            if(ex) ex.q++; else cart.push({n:name, p:price, q:1});
+            updateCart();
         }
 
-        function updateUI() {
-            document.getElementById('cart-count').textContent = cart.reduce((s, i) => s + i.qty, 0);
-            const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        function updateCart() {
+            const count = cart.reduce((s,i) => s+i.q, 0);
+            const total = cart.reduce((s,i) => s+i.p*i.q, 0);
+            document.getElementById('cart-count').textContent = count;
             document.getElementById('total-price').textContent = total.toLocaleString() + " so'm";
             
-            const cartList = document.getElementById('cart-items-list');
-            cartList.innerHTML = cart.map(item => `
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px; align-items:center;">
-                    <div>
-                        <div style="font-weight:600; font-size:14px;">${item.name}</div>
-                        <div style="font-size:12px; color:gray;">${item.qty} x ${item.price.toLocaleString()}</div>
+            const list = document.getElementById('cart-items-list');
+            list.innerHTML = cart.map(i => `
+                <div style="margin-bottom:15px; border-bottom:1px solid #f0f0f0; padding-bottom:10px;">
+                    <div style="font-weight:600;">${i.n}</div>
+                    <div style="display:flex; justify-content:space-between; color:var(--gray); font-size:13px;">
+                        <span>${i.q} x ${i.p.toLocaleString()}</span>
+                        <span style="color:var(--primary); font-weight:700;">${(i.q*i.p).toLocaleString()} so'm</span>
                     </div>
-                    <div style="font-weight:700;">${(item.qty * item.price).toLocaleString()}</div>
                 </div>
             `).join('');
         }
@@ -302,16 +231,14 @@
         }
 
         function sendOrder() {
-            if (cart.length === 0) return alert("Savatcha bo'sh!");
-            let msg = "Yangi buyurtma:\n\n";
-            cart.forEach(item => msg += `${item.name} x ${item.qty} = ${(item.qty*item.price).toLocaleString()} so'm\n`);
-            msg += `\nJami: ${cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString()} so'm`;
-            
-            const botUrl = `https://t.me/rahmatchef_delivery_bot?text=${encodeURIComponent(msg)}`;
-            window.open(botUrl, '_blank');
+            if(!cart.length) return;
+            let text = "Yangi Buyurtma (Rahmat Chef):\n\n";
+            cart.forEach(i => text += `• ${i.n} (${i.q} ta) - ${(i.q*i.p).toLocaleString()} so'm\n`);
+            text += `\nJami: ${cart.reduce((s,i)=>s+i.p*i.q, 0).toLocaleString()} so'm`;
+            window.open(`https://t.me/rahmatchef_delivery_bot?text=${encodeURIComponent(text)}`);
         }
 
-        renderProducts();
+        init();
     </script>
 </body>
 </html>
