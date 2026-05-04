@@ -1,113 +1,71 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahmat Chef</title>
+
 <style>
 body{margin:0;font-family:sans-serif;background:#0f0f0f;color:white}
-
-.header{
-position:sticky;top:0;
-background:#111;padding:15px;
-display:flex;justify-content:space-between;
-border-bottom:1px solid #222;
-}
-
-.logo{color:#00c853;font-weight:bold}
-
-.categories{
-display:flex;overflow-x:auto;padding:10px;background:#111;
-}
-
-.categories button{
-background:#1a1a1a;color:#aaa;
-border:none;padding:8px 15px;
-border-radius:20px;margin-right:8px;
-}
-
-.categories button.active{
-background:#00c853;color:black;
-}
-
-.card{
-background:#1a1a1a;
-margin:10px;padding:15px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,0.4);
-transition:0.3s;
-}
-
-.card:hover{transform:scale(1.03)}
-
-.price{color:#00c853;font-weight:bold}
-
-.order-btn{
-background:#00c853;
-border:none;
-padding:10px;
-border-radius:10px;
-width:100%;
-margin-top:10px;
-}
-
-.bottom{
-position:fixed;
-bottom:0;width:100%;
-background:#111;
-padding:10px;text-align:center;
-}
-
-.bottom a{
-background:#00c853;
-padding:12px 20px;
-border-radius:10px;
-color:black;text-decoration:none;
-}
+.header{padding:15px;background:#111;display:flex;justify-content:space-between}
+.card{background:#1a1a1a;margin:10px;padding:15px;border-radius:10px}
+button{background:#00c853;border:none;padding:10px;width:100%;margin-top:10px;border-radius:8px}
+.cart{position:fixed;top:10px;right:10px;background:#00c853;padding:10px;border-radius:10px;color:black}
+.bottom{position:fixed;bottom:0;width:100%;background:#111;padding:10px;text-align:center}
 </style>
+</head>
+
+<body>
 
 <div class="header">
-<div class="logo">Rahmat Chef</div>
+<div>Rahmat Chef</div>
 <div>24/7</div>
 </div>
 
-<div class="categories">
-<button onclick="show('bar')" class="active">Bar</button>
-<button onclick="show('coffee')">Coffee</button>
-<button onclick="show('dessert')">Dessert</button>
-</div>
+<div class="cart">🛒 <span id="count">0</span></div>
 
-<div id="bar">
 <div class="card">
 <h3>Ko‘k choy</h3>
-<div class="price">15000</div>
-<button class="order-btn" onclick="order('Ko‘k choy')">Buyurtma</button>
-</div>
+<p>15000</p>
+<button onclick="add('Ko‘k choy')">Qo‘shish</button>
 </div>
 
-<div id="coffee" style="display:none">
 <div class="card">
 <h3>Cappuccino</h3>
-<div class="price">30000</div>
-<button class="order-btn" onclick="order('Cappuccino')">Buyurtma</button>
-</div>
+<p>30000</p>
+<button onclick="add('Cappuccino')">Qo‘shish</button>
 </div>
 
-<div id="dessert" style="display:none">
 <div class="card">
 <h3>Cheesecake</h3>
-<div class="price">35000</div>
-<button class="order-btn" onclick="order('Cheesecake')">Buyurtma</button>
-</div>
+<p>35000</p>
+<button onclick="add('Cheesecake')">Qo‘shish</button>
 </div>
 
 <div class="bottom">
-<a href="https://t.me/rahmatchef_delivery_bot">Buyurtma berish</a>
+<button onclick="order()">Buyurtma berish</button>
 </div>
 
 <script>
-function show(id){
-document.querySelectorAll('#bar,#coffee,#dessert')
-.forEach(e=>e.style.display='none');
-document.getElementById(id).style.display='block';
+let cart = [];
+
+function add(item){
+cart.push(item);
+document.getElementById("count").innerText = cart.length;
 }
 
-function order(item){
+function order(){
+let text = "Buyurtma:\n" + cart.join("\n");
+
+fetch("YOUR_GOOGLE_SCRIPT_URL", {
+method:"POST",
+body: JSON.stringify({order:text})
+});
+
 window.location.href =
-"https://t.me/rahmatchef_delivery_bot?start="+encodeURIComponent(item);
+"https://t.me/rahmatchef_delivery_bot?start=" + encodeURIComponent(text);
 }
 </script>
+
+</body>
+</html>
